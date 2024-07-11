@@ -1,0 +1,4081 @@
+{
+	"info": {
+		"_postman_id": "6ae93f3a-5def-4575-a0cd-27f905e6ed70",
+		"name": "AgentMessengerAUTO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34413486"
+	},
+	"item": [
+		{
+			"name": "Аутентификация пользователя. Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"pm.collectionVariables.set(\"auth_token\", responseJSON[\"token\"])\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"console.log(\"Получен токен \"+ responseJSON[\"token\"])"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"{{Messager_UN}}\",\n  \"password\": \"{{Messager_PW}}\"\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Users/Login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Users",
+						"Login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Users/Login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"token\": \"<string>\",\n  \"message\": \"<string>\"\n}"
+				},
+				{
+					"name": "Пожалуйста, введите корректный логин и пароль.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Users/Login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Превышен лимит запросов.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Users/Login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"status": "Too Many Requests",
+					"code": 429,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Users/Login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Users/Login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получить сообщения по существующему документу. Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=1&documentNumber=23026953",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Documents",
+						"Messages"
+					],
+					"query": [
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"description": "(Required) Id - типа документа"
+						},
+						{
+							"key": "documentNumber",
+							"value": "23026953",
+							"description": "(Required) Номер документа"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Messages"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"messages\": [\n    {\n      \"messageId\": \"<long>\",\n      \"parentMessageId\": \"<long>\",\n      \"contactFrom\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"document\": {\n        \"documentNumber\": \"<string>\",\n        \"documentTypeDto\": {\n          \"documentTypeId\": \"<integer>\",\n          \"documentTypeName\": \"<string>\"\n        }\n      },\n      \"toContactsList\": [\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        },\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        }\n      ],\n      \"toGroupsList\": [\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        },\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        }\n      ],\n      \"messageContent\": {\n        \"messageSubject\": {\n          \"messageSubjectId\": \"<integer>\",\n          \"messageSubjectName\": \"<string>\"\n        },\n        \"text\": \"<string>\"\n      },\n      \"messageAttributes\": [\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        },\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        }\n      ],\n      \"messageHistory\": [\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        },\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        }\n      ],\n      \"dateTimeCreated\": \"<dateTime>\"\n    },\n    {\n      \"messageId\": \"<long>\",\n      \"parentMessageId\": \"<long>\",\n      \"contactFrom\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"document\": {\n        \"documentNumber\": \"<string>\",\n        \"documentTypeDto\": {\n          \"documentTypeId\": \"<integer>\",\n          \"documentTypeName\": \"<string>\"\n        }\n      },\n      \"toContactsList\": [\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        },\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        }\n      ],\n      \"toGroupsList\": [\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        },\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        }\n      ],\n      \"messageContent\": {\n        \"messageSubject\": {\n          \"messageSubjectId\": \"<integer>\",\n          \"messageSubjectName\": \"<string>\"\n        },\n        \"text\": \"<string>\"\n      },\n      \"messageAttributes\": [\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        },\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        }\n      ],\n      \"messageHistory\": [\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        },\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        }\n      ],\n      \"dateTimeCreated\": \"<dateTime>\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Messages"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Messages"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Messages"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Messages?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Messages"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получить список доступных групп для нового сообщения по существующему документу. Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=1&documentNumber=23026953",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Documents",
+						"Contacts",
+						"Groups"
+					],
+					"query": [
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"description": "(Required) Id - типа документа"
+						},
+						{
+							"key": "documentNumber",
+							"value": "23026953",
+							"description": "(Required) Номер документа"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts",
+								"Groups"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"contactGroupsList\": [\n    {\n      \"contactGroupId\": \"<integer>\",\n      \"contactGroupName\": \"<string>\"\n    },\n    {\n      \"contactGroupId\": \"<integer>\",\n      \"contactGroupName\": \"<string>\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts",
+								"Groups"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts",
+								"Groups"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts",
+								"Groups"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts/Groups?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts",
+								"Groups"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получить список доступных контактов для нового сообщения по существующему документу. Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=1&documentNumber=23026953",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Documents",
+						"Contacts"
+					],
+					"query": [
+						{
+							"key": "documentTypeId",
+							"value": "1",
+							"description": "(Required) Id - типа документа"
+						},
+						{
+							"key": "documentNumber",
+							"value": "23026953",
+							"description": "(Required) Номер документа"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"contactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactName\": \"<string>\",\n      \"contactTypeDto\": {\n        \"contactTypeId\": \"<integer>\",\n        \"contactTypeName\": \"<string>\"\n      }\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactName\": \"<string>\",\n      \"contactTypeDto\": {\n        \"contactTypeId\": \"<integer>\",\n        \"contactTypeName\": \"<string>\"\n      }\n    }\n  ]\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Documents/Contacts?documentTypeId=<integer>&documentNumber=<string>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Documents",
+								"Contacts"
+							],
+							"query": [
+								{
+									"key": "documentTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа документа"
+								},
+								{
+									"key": "documentNumber",
+									"value": "<string>",
+									"description": "(Required) Номер документа"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Получить список новых сообщений КОНТАКТА. Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Messages/New",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Messages",
+						"New"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/New",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								"New"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"messages\": [\n    {\n      \"messageId\": \"<long>\",\n      \"parentMessageId\": \"<long>\",\n      \"contactFrom\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"document\": {\n        \"documentNumber\": \"<string>\",\n        \"documentTypeDto\": {\n          \"documentTypeId\": \"<integer>\",\n          \"documentTypeName\": \"<string>\"\n        }\n      },\n      \"toContactsList\": [\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        },\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        }\n      ],\n      \"toGroupsList\": [\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        },\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        }\n      ],\n      \"messageContent\": {\n        \"messageSubject\": {\n          \"messageSubjectId\": \"<integer>\",\n          \"messageSubjectName\": \"<string>\"\n        },\n        \"text\": \"<string>\"\n      },\n      \"messageAttributes\": [\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        },\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        }\n      ],\n      \"messageHistory\": [\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        },\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        }\n      ],\n      \"dateTimeCreated\": \"<dateTime>\"\n    },\n    {\n      \"messageId\": \"<long>\",\n      \"parentMessageId\": \"<long>\",\n      \"contactFrom\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"document\": {\n        \"documentNumber\": \"<string>\",\n        \"documentTypeDto\": {\n          \"documentTypeId\": \"<integer>\",\n          \"documentTypeName\": \"<string>\"\n        }\n      },\n      \"toContactsList\": [\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        },\n        {\n          \"contactId\": \"<integer>\",\n          \"contactName\": \"<string>\",\n          \"contactTypeDto\": {\n            \"contactTypeId\": \"<integer>\",\n            \"contactTypeName\": \"<string>\"\n          }\n        }\n      ],\n      \"toGroupsList\": [\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        },\n        {\n          \"contactGroupId\": \"<integer>\",\n          \"contactGroupName\": \"<string>\"\n        }\n      ],\n      \"messageContent\": {\n        \"messageSubject\": {\n          \"messageSubjectId\": \"<integer>\",\n          \"messageSubjectName\": \"<string>\"\n        },\n        \"text\": \"<string>\"\n      },\n      \"messageAttributes\": [\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        },\n        {\n          \"messageAttributeId\": \"<long>\",\n          \"attributeType\": {\n            \"messageAttributeTypeId\": \"<integer>\",\n            \"messageAttributeTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          }\n        }\n      ],\n      \"messageHistory\": [\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        },\n        {\n          \"messageEventId\": \"<long>\",\n          \"messageEventType\": {\n            \"eventTypeId\": \"<integer>\",\n            \"eventTypeName\": \"<string>\",\n            \"isEnabledForUser\": \"<boolean>\"\n          },\n          \"contactInitiator\": {\n            \"contactId\": \"<integer>\",\n            \"contactName\": \"<string>\",\n            \"contactTypeDto\": {\n              \"contactTypeId\": \"<integer>\",\n              \"contactTypeName\": \"<string>\"\n            }\n          },\n          \"eventDateTimeCreated\": \"<dateTime>\"\n        }\n      ],\n      \"dateTimeCreated\": \"<dateTime>\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/New",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								"New"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/New",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								"New"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/New",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								"New"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/New",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								"New"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник групп пользователей Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Contacts",
+						"Groups"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts",
+								"Groups"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"contactGroupId\": \"<integer>\",\n    \"contactGroupName\": \"<string>\"\n  },\n  {\n    \"contactGroupId\": \"<integer>\",\n    \"contactGroupName\": \"<string>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts",
+								"Groups"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts",
+								"Groups"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts",
+								"Groups"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts/Groups",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts",
+								"Groups"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник типов контактов Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Contacts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"contactTypeId\": \"<integer>\",\n    \"contactTypeName\": \"<string>\"\n  },\n  {\n    \"contactTypeId\": \"<integer>\",\n    \"contactTypeName\": \"<string>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Contacts"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник типов документов Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Documents",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Documents"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Documents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Documents"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"documentTypeId\": \"<integer>\",\n    \"documentTypeName\": \"<string>\"\n  },\n  {\n    \"documentTypeId\": \"<integer>\",\n    \"documentTypeName\": \"<string>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Documents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Documents"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Documents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Documents"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Documents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Documents"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Documents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Documents"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник событий Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Messages",
+						"Events"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Events"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"eventTypeId\": \"<integer>\",\n    \"eventTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  },\n  {\n    \"eventTypeId\": \"<integer>\",\n    \"eventTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Events"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Events"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Events"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Events"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник атрибутов сообщений Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Messages",
+						"Attributes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Attributes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"messageAttributeTypeId\": \"<integer>\",\n    \"messageAttributeTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  },\n  {\n    \"messageAttributeTypeId\": \"<integer>\",\n    \"messageAttributeTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Attributes"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Attributes"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Attributes"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Attributes"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Справочник тем сообщений Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Types",
+						"Messages",
+						"Subjects"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Subjects"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n  {\n    \"messageSubjectId\": \"<integer>\",\n    \"messageSubjectName\": \"<string>\"\n  },\n  {\n    \"messageSubjectId\": \"<integer>\",\n    \"messageSubjectName\": \"<string>\"\n  }\n]"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Subjects"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Subjects"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Subjects"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Types/Messages/Subjects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Types",
+								"Messages",
+								"Subjects"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Создать новое сообщение (отправить). Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)\r",
+							"pm.collectionVariables.set(\"message_id\", responseJSON[\"messageId\"])"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"parentMessageId\": null,\n  \"toContactsList\": [\n    {\n      \"contactId\": 108733,\n      \"contactTypeId\": 1\n    }\n  ],\n  \"document\": {\n    \"documentNumber\": \"23026953\",\n    \"documentTypeId\": 1\n  },\n  \"content\": {\n    \"messageSubjectId\": 1,\n    \"text\": \"Вcем привет! Я учусь отправлять сообщения своим коллегам из Major-Express. Желаю хорошего дня!)\"\n  },\n  \"dateTimeCreated\": \"{{currentDateTime}}\"\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Messages",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Messages"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Возвращает успешно созданный объект.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentMessageId\": \"<long>\",\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    }\n  ],\n  \"toGroupsList\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeId\": \"<integer>\"\n  },\n  \"content\": {\n    \"messageSubjectId\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  \"messageAttributeTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"historyEventTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"messageId\": \"<long>\",\n  \"parentMessageId\": \"<long>\",\n  \"contactFrom\": {\n    \"contactId\": \"<integer>\",\n    \"contactName\": \"<string>\",\n    \"contactTypeDto\": {\n      \"contactTypeId\": \"<integer>\",\n      \"contactTypeName\": \"<string>\"\n    }\n  },\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeDto\": {\n      \"documentTypeId\": \"<integer>\",\n      \"documentTypeName\": \"<string>\"\n    }\n  },\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactName\": \"<string>\",\n      \"contactTypeDto\": {\n        \"contactTypeId\": \"<integer>\",\n        \"contactTypeName\": \"<string>\"\n      }\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactName\": \"<string>\",\n      \"contactTypeDto\": {\n        \"contactTypeId\": \"<integer>\",\n        \"contactTypeName\": \"<string>\"\n      }\n    }\n  ],\n  \"toGroupsList\": [\n    {\n      \"contactGroupId\": \"<integer>\",\n      \"contactGroupName\": \"<string>\"\n    },\n    {\n      \"contactGroupId\": \"<integer>\",\n      \"contactGroupName\": \"<string>\"\n    }\n  ],\n  \"messageContent\": {\n    \"messageSubject\": {\n      \"messageSubjectId\": \"<integer>\",\n      \"messageSubjectName\": \"<string>\"\n    },\n    \"text\": \"<string>\"\n  },\n  \"messageAttributes\": [\n    {\n      \"messageAttributeId\": \"<long>\",\n      \"attributeType\": {\n        \"messageAttributeTypeId\": \"<integer>\",\n        \"messageAttributeTypeName\": \"<string>\",\n        \"isEnabledForUser\": \"<boolean>\"\n      }\n    },\n    {\n      \"messageAttributeId\": \"<long>\",\n      \"attributeType\": {\n        \"messageAttributeTypeId\": \"<integer>\",\n        \"messageAttributeTypeName\": \"<string>\",\n        \"isEnabledForUser\": \"<boolean>\"\n      }\n    }\n  ],\n  \"messageHistory\": [\n    {\n      \"messageEventId\": \"<long>\",\n      \"messageEventType\": {\n        \"eventTypeId\": \"<integer>\",\n        \"eventTypeName\": \"<string>\",\n        \"isEnabledForUser\": \"<boolean>\"\n      },\n      \"contactInitiator\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"eventDateTimeCreated\": \"<dateTime>\"\n    },\n    {\n      \"messageEventId\": \"<long>\",\n      \"messageEventType\": {\n        \"eventTypeId\": \"<integer>\",\n        \"eventTypeName\": \"<string>\",\n        \"isEnabledForUser\": \"<boolean>\"\n      },\n      \"contactInitiator\": {\n        \"contactId\": \"<integer>\",\n        \"contactName\": \"<string>\",\n        \"contactTypeDto\": {\n          \"contactTypeId\": \"<integer>\",\n          \"contactTypeName\": \"<string>\"\n        }\n      },\n      \"eventDateTimeCreated\": \"<dateTime>\"\n    }\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentMessageId\": \"<long>\",\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    }\n  ],\n  \"toGroupsList\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeId\": \"<integer>\"\n  },\n  \"content\": {\n    \"messageSubjectId\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  \"messageAttributeTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"historyEventTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentMessageId\": \"<long>\",\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    }\n  ],\n  \"toGroupsList\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeId\": \"<integer>\"\n  },\n  \"content\": {\n    \"messageSubjectId\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  \"messageAttributeTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"historyEventTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentMessageId\": \"<long>\",\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    }\n  ],\n  \"toGroupsList\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeId\": \"<integer>\"\n  },\n  \"content\": {\n    \"messageSubjectId\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  \"messageAttributeTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"historyEventTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parentMessageId\": \"<long>\",\n  \"toContactsList\": [\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    },\n    {\n      \"contactId\": \"<integer>\",\n      \"contactTypeId\": \"<integer>\"\n    }\n  ],\n  \"toGroupsList\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"document\": {\n    \"documentNumber\": \"<string>\",\n    \"documentTypeId\": \"<integer>\"\n  },\n  \"content\": {\n    \"messageSubjectId\": \"<integer>\",\n    \"text\": \"<string>\"\n  },\n  \"messageAttributeTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"historyEventTypes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"dateTimeCreated\": \"<dateTime>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Добавить событие к существующему сообщению. Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messageEventTypeId\": 2\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Messages",
+						":messageId",
+						"Events"
+					],
+					"variable": [
+						{
+							"key": "messageId",
+							"value": "{{message_id}}",
+							"description": "(Required) Id - сообщения"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Возвращает успешно созданный объект.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageEventTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Events"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"messageEventId\": \"<long>\",\n  \"messageEventType\": {\n    \"eventTypeId\": \"<integer>\",\n    \"eventTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  },\n  \"contactInitiator\": {\n    \"contactId\": \"<integer>\",\n    \"contactName\": \"<string>\",\n    \"contactTypeDto\": {\n      \"contactTypeId\": \"<integer>\",\n      \"contactTypeName\": \"<string>\"\n    }\n  },\n  \"eventDateTimeCreated\": \"<dateTime>\"\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageEventTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Events"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageEventTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Events"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageEventTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Events"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageEventTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Events"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Добавить новый атрибут к существующему сообщению. Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messageAttributeTypeId\": 2\n}",
+					"options": {
+						"raw": {
+							"headerFamily": "json",
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Messages",
+						":messageId",
+						"Attributes"
+					],
+					"variable": [
+						{
+							"key": "messageId",
+							"value": "{{message_id}}",
+							"description": "(Required) Id - сообщения"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Возвращает успешно созданный объект.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageAttributeTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"messageAttributeId\": \"<long>\",\n  \"attributeType\": {\n    \"messageAttributeTypeId\": \"<integer>\",\n    \"messageAttributeTypeName\": \"<string>\",\n    \"isEnabledForUser\": \"<boolean>\"\n  }\n}"
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageAttributeTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageAttributeTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageAttributeTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageAttributeTypeId\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Удалить атрибут из существующего сообщения. Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Messages",
+						":messageId",
+						"Attributes"
+					],
+					"query": [
+						{
+							"key": "messageAttributeTypeId",
+							"value": "2",
+							"description": "(Required) Id - типа аттрибута"
+						}
+					],
+					"variable": [
+						{
+							"key": "messageId",
+							"value": "{{message_id}}",
+							"description": "(Required) Id - сообщения"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Запрос выполнен успешно",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"query": [
+								{
+									"key": "messageAttributeTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа аттрибута"
+								}
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Что-то не так в содержании запроса. Ориентируйтесь на описание ошибки, чтобы понять, что именно не так.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"query": [
+								{
+									"key": "messageAttributeTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа аттрибута"
+								}
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "В запросе не указан (или указан, но не там) авторизационный токен. Проверьте, что токен действительный.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"query": [
+								{
+									"key": "messageAttributeTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа аттрибута"
+								}
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "<string>"
+				},
+				{
+					"name": "Ошибка при обработке запроса на стороне Major-Express. Такая ошибка через некоторое время исчезнет сама собой. Если этого не происходит, обратитесь в службу поддержки, не забыв указать traceId.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"query": [
+								{
+									"key": "messageAttributeTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа аттрибута"
+								}
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"traceId\": \"<string>\"\n}"
+				},
+				{
+					"name": "Сервер Major-Express перегружен. Такая ошибка через некоторое время исчезнет сама собой.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "<API Key>",
+								"description": "Added as a part of security scheme: apikey"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/Messages/:messageId/Attributes?messageAttributeTypeId=<integer>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Messages",
+								":messageId",
+								"Attributes"
+							],
+							"query": [
+								{
+									"key": "messageAttributeTypeId",
+									"value": "<integer>",
+									"description": "(Required) Id - типа аттрибута"
+								}
+							],
+							"variable": [
+								{
+									"key": "messageId"
+								}
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"var moment = require('moment');\r",
+					"pm.collectionVariables.set(\"currentDateTime\", moment().format((\"YYYY-MM-DDTHH:mm:ss\")))\r",
+					"var startOfMonth = moment().startOf('month').format('YYYY-MM-DDT00:00:00');\r",
+					"pm.collectionVariables.set(\"startOfMonth\", startOfMonth)\r",
+					"var endOfMonth   = moment().endOf('month').format('YYYY-MM-DDT23:59:59');\r",
+					"pm.collectionVariables.set(\"endOfMonth\", endOfMonth)"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {\r",
+					"    pm.response.to.have.status(200);\r",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "currentDateTime",
+			"value": ""
+		},
+		{
+			"key": "startOfMonth",
+			"value": ""
+		},
+		{
+			"key": "endOfMonth",
+			"value": ""
+		},
+		{
+			"key": "auth_token",
+			"value": ""
+		},
+		{
+			"key": "message_id",
+			"value": ""
+		}
+	]
+}
